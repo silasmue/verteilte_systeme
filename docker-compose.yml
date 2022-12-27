@@ -1,0 +1,50 @@
+# Author: Silas Müller (26.12.2022)
+version: '3.9'
+services:
+  db:
+    container_name: mariadb
+    image: mariadb:jammy
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: secretroot
+      MARIADB_USER: mariadb
+      MARIADB_PASSWORD: secret
+    networks:
+      - appnet
+    ports:
+      - "3306:3306" # mariaDB standard
+    volumes:
+      - mariadb:/var/lib/mysql # mariaDB standard files
+  backend:
+    container_name: nest
+    build: .
+    networks:
+      - appnet
+    ports:
+      - "8080:3000"
+    environment:
+      DATABASE_HOST: mariadb
+      DATABASE_PORT: 3306
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: secretroot
+      DATABASE_NAME: vs
+  frontend:
+    container_name: springfrontend
+    networks:
+      - appnet
+    ports: 
+      - "8090:8090"
+    environment:
+      SERVER_PORT: 8090
+      BACKEND_ENDPOINT: http://nest:3000/todos/
+    image: "maeddes/hsefrontend:v1"
+    
+
+networks:
+  appnet:
+    name: appnet
+volumes:
+  mariadb:
+    external: true # you have to create the mariadb volume in your docker
+  
+  # TODO nestjs

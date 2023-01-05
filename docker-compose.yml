@@ -14,7 +14,7 @@ services:
     ports:
       - "3306:3306" # mariaDB standard
     volumes:
-      - mariadb:/var/lib/mysql # mariaDB standard files
+      - maria:/var/lib/mysql # mariaDB standard files
   backend:
     container_name: nest
     build: .
@@ -44,7 +44,7 @@ networks:
   appnet:
     name: appnet
 volumes:
-  mariadb:
+  maria:
     external: true # you have to create the mariadb volume in your docker
   
   # TODO nestjs

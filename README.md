@@ -33,10 +33,10 @@ Returns the amount of the todo objects in the database.
 Insert a todo object into the database.
 Provide the object as json in the request body.
 A sample input would be: 
-`{
+```{
     "todo": "Verteilte Systeme Abgabe",
     "priority": 2
-}`
+}```
 
 
 ### POST `/todos/{name}`
@@ -46,10 +46,10 @@ Inserts a new todo object into the database with the {name} as name and the prio
 ### DELETE `/todos`
 Deletes the todo object of the request body.
 A sample input would be:
-`{
+```{
     "todo": "Verteilte Systeme Abgabe",
     "priority": 2
-}`
+}```
 
 ### DELETE `/todos/{id}`
 Deletes the todo object with the {id}.
